@@ -3,6 +3,9 @@
 main() {
 	int c;
 
-	while ((c != getchar()) != EOF)
-		putchar(c);
+	c = getchar();
+	while (c != EOF) {
+		printf("%d\n", EOF);
+		return 0;
+	}
 }
