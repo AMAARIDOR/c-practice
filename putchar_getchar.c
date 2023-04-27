@@ -1,11 +1,15 @@
 #include <stdio.h>
 
-main() {
-	int c;
+/* count characters input; 1st version */
 
-	c = getchar();
-	while (c != EOF) {
-		printf("%d\n", EOF);
-		return 0;
-	}
+main() {
+	char x = "String";
+	int y = 129389; 
+	long z = "A very long string with 1234"; 
+	
+	printf("%lu\n", sizeof(x));
+	printf("%lu\n", sizeof(y));
+	printf("%lu\n", sizeof(z));
+
+	return 0;
 }
