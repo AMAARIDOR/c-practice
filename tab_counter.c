@@ -6,7 +6,7 @@ int main() {
     tb = 0;
 
     while ((c = getchar()) != '\n')
-        if (c == '\t')
+        if (c == ' ')
             ++tb;
     printf("%d\n", tb);
 }
