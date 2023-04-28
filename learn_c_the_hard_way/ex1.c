@@ -5,5 +5,5 @@ int main() {
 	int something = 9000;
 
 	printf("You are %d miles away.\n", distance);
-	printf("Something about this is nice at %d", something);
+	printf("This is just a test sentence, with a number %d", something);
 }
