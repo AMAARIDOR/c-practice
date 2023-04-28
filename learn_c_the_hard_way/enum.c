@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 enum Level {
     LOW = 25,
@@ -13,8 +14,13 @@ enum Bread {
 };
 
 int main() {
+    bool yes = false;
     enum Level myVar = MEDIUM;
     enum Bread leastFavoriteBread = NORMAL; 
+
+    if (yes == true) {
+        printf("something");
+    }
 
     printf("%d\n", myVar);
     printf("%d\n", leastFavoriteBread);
