@@ -2,11 +2,15 @@
 #include <stdbool.h>
 
 int main() {
-    bool yes = true;
+    bool yes = false;
 
     if (yes == true) {
-		printf("Something")
+		printf("Something");
+        goto fail;
     }
+    
+    fail:
+        printf("fail condition");
 
-    return printf("It failed lol\n");
+    return 0;
 }
