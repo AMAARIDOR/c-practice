@@ -1,18 +1,16 @@
 #include <stdio.h>
 
 int main() {
-    int testInteger;
+    int a, b;
 
-    printf("Enter a integer: ");
+    printf("Enter 2 integers: ");
 
-    scanf("%d", &testInteger);
-
-    printf("Number = %d\n", testInteger);
+    scanf("%d%d", &a, &b);
 
     return 0;
 }
 
 // function definition
-int sum(int num1, int num2) {
-    return (num1 + num2); 
+int sum(int x, int y) {
+    return (x + y); 
 }
