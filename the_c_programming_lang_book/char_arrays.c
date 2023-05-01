@@ -13,10 +13,10 @@ int main() {
 	char longest[MAXLINE];
 
 	max = 0;
-	while ((len = getline(line, MAXLINE)) > 0)
+	while ((len = linegetter(line, MAXLINE)) > 0)
 		if (len > max) {
 			max = len;
-			copy(longest, line);
+			copier(longest, line);
 		}
 		
 	if (max > 0)
