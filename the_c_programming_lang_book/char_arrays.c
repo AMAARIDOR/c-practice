@@ -6,7 +6,7 @@ void copy(char to[], char from[]);
 
 // print longest input line
 
-main() {
+int main() {
 	int len;
 	int max;
 	char line[MAXLINE];
