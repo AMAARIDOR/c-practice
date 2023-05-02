@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+// This is just a small hello world type project. Nothing too complex
+
 main() {
     printf("I am learning the %c programming language\n", 'C');
     printf("I have just completed Chapter %d\n", 2);
