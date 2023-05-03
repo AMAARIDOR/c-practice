@@ -29,8 +29,6 @@ int main(int argc, char*argv[]) {
 
 	double part_of_universe = expected_bugs / universe_of_defects;
 	printf("The is only a %e portion of the universe.\n", part_of_universe);
-
-	// This makes no sense, just a demo of something weird
 	
 	char nul_byte = '\0';
 	int care_percentage = bugs * nul_byte;
