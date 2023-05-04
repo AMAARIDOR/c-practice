@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 	name[0] = 'Z';
 	name[1] = 'e';
 	name[2] = 'd';
-	name[3] = '\0';
+	name[3] = '\n';
 
 	// then print them out initialized
 	printf("numbers: %d %d %d %d\n", numbers[0], numbers[1], numbers[2], numbers[3]);
