@@ -19,16 +19,12 @@ void print_letters(char arg[]) {
 	for (i = 0; arg[i] != '\0'; i++) {
 		char ch = arg[i];
 
-		if (can_print_it(ch)) {
+		if (isalpha(ch) || isblank(ch)) {
 			printf("'%c' == %d ", ch, ch);
 		}
 	}
 
 	printf("\n");
-}
-
-int can_print_it(char ch) {
-	return isalpha(ch) || isblank(ch);
 }
 
 int main(int argc, char *argv[]) {
