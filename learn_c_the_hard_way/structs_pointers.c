@@ -1,7 +1,7 @@
-#include <stdio.h> 
-#include <assert.h>
-#include <stdlib.h> 
-#include <string.h>
+#include <stdio.h> // Provides basic C functions
+#include <assert.h> // Provides assert macro
+#include <stdlib.h> // Provides free and malloc
+#include <string.h> // Provides some stuff idk
 
 struct Person {
     char *name;
