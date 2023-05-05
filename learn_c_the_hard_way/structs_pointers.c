@@ -14,10 +14,10 @@ struct Person *Person_create(char *name, int age, int height, int weight) {
     struct Person *who = malloc(sizeof(struct Person));
     assert(who != NULL);
 
-    who -> name = strdup(name);
-    who -> age = age;
-    who -> height = height;
-    who -> weight = weight; 
+    who->name = strdup(name);
+    who->age = age;
+    who->height = height;
+    who->weight = weight; 
 
     return who;
 }
@@ -25,15 +25,15 @@ struct Person *Person_create(char *name, int age, int height, int weight) {
 void Person_destroy(struct Person *who) {
     assert(who != NULL);
 
-    free(who -> name);
+    free(who->name);
     free(who);
 }
 
 void Person_print(struct Person *who) {
-    printf("Name: %s\n", who -> name);
-    printf("\tAge: %d\n", who -> age);
-    printf("\tHeight: %d\n", who -> height);
-    printf("\tWeight: %d\n", who -> weight);
+    printf("Name: %s\n", who->name);
+    printf("\tAge: %d\n", who->age);
+    printf("\tHeight: %d\n", who->height);
+    printf("\tWeight: %d\n", who->weight);
 }
 
 int main(int argc, char *argv[]) {
@@ -49,13 +49,13 @@ int main(int argc, char *argv[]) {
     Person_print(frank);
 
     // Make everyone age 20 years and print them again
-    joe -> age += 20;
-    joe -> height -= 2;
-    joe -> weight += 40;
+    joe->age += 20;
+    joe->height -= 2;
+    joe->weight += 40;
     Person_print(joe);
 
-    frank -> age += 20;
-    frank -> height += 20;
+    frank->age += 20;
+    frank->height += 20;
     Person_print(frank);
 
     // Destroy them both so we clean up
