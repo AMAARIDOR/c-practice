@@ -3,7 +3,7 @@
 int main(int argc, char *argv[]) {
 
 	//create two arrays we care about
-	int *ages[] = { 23, 43, 12, 89, 2 };
+	int ages[] = { 23, 43, 12, 89, 2 };
 	char *names[] = { "Alan", "Frank", "Mary", "John", "Lisa" };
 
 	//safely get the size of ages
@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
 	printf("---\n");
 
 	// set up the pointers to start of the arrays
-	int **cur_age = ages;
+	int *cur_age = ages;
 	char **cur_name = names;
 
 	//second way using pointers
