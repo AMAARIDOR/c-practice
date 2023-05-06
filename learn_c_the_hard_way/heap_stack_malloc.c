@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <stdio.h> // Standard Library for C
 #include <assert.h>
 #include <stdlib.h>
 #include <errno.h>
