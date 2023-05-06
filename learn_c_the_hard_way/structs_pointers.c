@@ -20,10 +20,10 @@ struct Person *Person_create(char *name, int age, int height, int weight) {
     assert(who != NULL);
 
     // Assign the values to the arguments of the structure
-    who->name = strdup(name);
-    who->age = age;
-    who->height = height;
-    who->weight = weight; 
+    (*who).name = strdup(name);
+    (*who).age = age;
+    (*who).height = height;
+    (*who).weight = weight;
 
     return who;
 }
@@ -33,16 +33,16 @@ void Person_destroy(struct Person *who) {
     assert(who != NULL);
 
     // Free memory because C doesn't have built-in garbage collector 
-    free(who->name);
+    free((*who).name);
     free(who);
 }
 
 // Make a Person_print function for the Person structure which prints the name, age, height and weight of the instance
 void Person_print(struct Person *who) {
-    printf("Name: %s\n", who->name);
-    printf("\tAge: %d\n", who->age);
-    printf("\tHeight: %d\n", who->height);
-    printf("\tWeight: %d\n", who->weight);
+    printf("Name: %s\n", (*who).name);
+    printf("\tAge: %d\n",(*who).age);
+    printf("\tHeight: %d\n",(*who).height);
+    printf("\tWeight: %d\n",(*who).weight);
 }
 
 // Main function 
@@ -59,13 +59,13 @@ int main(int argc, char *argv[]) {
     Person_print(frank);
 
     // Make everyone age 20 years and print them again
-    joe->age += 20;
-    joe->height -= 2;
-    joe->weight += 40;
+    (*joe).age += 20;
+    (*joe).age -= 2;
+    (*joe).age += 40;
     Person_print(joe);
 
-    frank->age += 20;
-    frank->height += 20;
+    (*frank).age += 20;
+    (*frank).height += 20;
     Person_print(frank);
 
     // Destroy them both so we clean up
