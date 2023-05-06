@@ -15,6 +15,7 @@ struct Person {
 struct Person *Person_create(char *name, int age, int height, int weight) {
     // Make a *who pointer for allocation of memory for the Person structure
     struct Person *who = malloc(sizeof(struct Person));
+
     // Check if the memory isn't NULL
     assert(who != NULL);
 
