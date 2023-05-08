@@ -4,9 +4,11 @@
 #include <errno.h>
 #include <string.h>
 
+// Define some values from future reference 
 #define MAX_DATA 512
 #define MAX_ROWS 100
 
+// Create Address struct 
 struct Address {
     int id;
     int set;
@@ -14,15 +16,18 @@ struct Address {
     char email[MAX_DATA];
 };
 
+// Create Database struct 
 struct Database {
     struct Address rows[MAX_ROWS];
 };
 
+// Create Connection struct
 struct Connection {
     FILE *file;
     struct Database *db;
 };
-
+	
+// Function to format error
 void die(const char *message) {
     if (errno) {
         perror(message);
@@ -33,10 +38,12 @@ void die(const char *message) {
     exit(1);
 };
 
+// Function to print address of database item
 void Address_print(struct Address *addr) {
     printf("%d %s %s\n", addr->id, addr->name, addr->email);
 }
 
+// Function for loading database items
 void Database_load(struct Connection *conn) {
     int rc = fread(conn->db, sizeof(struct Database), 1, conn->file);
 
