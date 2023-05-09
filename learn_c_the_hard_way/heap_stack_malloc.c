@@ -1,5 +1,5 @@
 #include <stdio.h> // Standard Library for C
-#include <assert.h>
+#include <assert.h> // Add assert macro for checking if memory exists
 #include <stdlib.h>
 #include <errno.h>
 #include <string.h>
