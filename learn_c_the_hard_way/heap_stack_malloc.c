@@ -177,8 +177,8 @@ int main(int argc, char *argv[]) {
 	struct Connection *conn = Database_open(filename, action); // Open database with arguments from argv as mentioned before
 	int id = 0; // Initialise ID
 
-	if (argc > 3) id = atoi(argv[3]);
-	if (id >= MAX_ROWS) die("There's not that many records.");
+	if (argc > 3) id = atoi(argv[3]); // Convert and assign argv third argument to id in integer form
+	if (id >= MAX_ROWS) die("There's not that many records."); // If the id is more than the number of maximum rows, end the program with die error formatting
 
 	switch (action) {
 		case 'c':
