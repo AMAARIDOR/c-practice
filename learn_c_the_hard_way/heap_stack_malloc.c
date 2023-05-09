@@ -34,7 +34,6 @@ void die(const char *message) {
     } else {
         printf("ERROR: %s\n", message);
     }
-
     exit(1);
 };
 
@@ -46,7 +45,6 @@ void Address_print(struct Address *addr) {
 // Function to load Data from already existing database
 void Database_load(struct Connection *conn) {
     int rc = fread(conn->db, sizeof(struct Database), 1, conn->file);
-
     if (rc != 1)
         die("Failed to load database.");
 }
@@ -54,25 +52,19 @@ void Database_load(struct Connection *conn) {
 // Struct to open database when needed with the filename and mode as arguments
 struct Connection *Database_open(const char *filename, char mode) {
     struct Connection *conn = malloc(sizeof(struct Connection));
-
     if (!conn)
         die("Memory error");
-
     conn->db = malloc(sizeof(struct Database));
-
     if (!conn->db)
         die("Memory error");
-
     if (mode == 'c') {
         conn->file = fopen(filename, "w");
     } else {
         conn->file = fopen(filename, "r+");
-
         if (conn->file) {
             Database_load(conn);
         }
     }
-
     if (!conn->file)
         die("Failed to open the file");
     
@@ -93,26 +85,19 @@ void Database_close(struct Connection *conn) {
 // Function to write to database
 void Database_write(struct Connection *conn) {
     rewind(conn->file);
-
 	int rc = fwrite(conn->db, sizeof(struct Database), 1, conn->file);
-	
 	if (rc != 1) 
 		die("Failed to write database.");
-
 	rc = fflush(conn->file);
 	if (rc == -1)
 		die("Cannot flush database.");
-
 }
 
 // Function to create a database if doesn't exist already
 void Database_create(struct Connection *conn) {
 	int i = 0;
-
 	for (i = 0; i < MAX_ROWS; i++) {
-		// make a prototype to initialize it
 		struct Address addr = { .id = i, .set = 0 };
-		// then just assign it
 		conn->db->rows[i] = addr;
 	}
 }
@@ -120,17 +105,12 @@ void Database_create(struct Connection *conn) {
 // Function to set a database with name, email
 void Database_set(struct Connection *conn, int id, const char *name, const char *email) {
 	struct Address *addr = &conn->db->rows[id];
-
 	if (addr->set)
 		die("Already set, delete it first");
-
 	addr->set = 1;
-	// WARNING: bug, read the "How to Break it" and fix this
 	char *res = strncpy(addr->name, name, MAX_DATA);
-	// demonstrate the strncpy bug
 	if (!res)
 		die("Name copy failed");
-
 	res = strncpy(addr->email, email, MAX_DATA);
 	if (!res)
 		die("Email copy failed");
@@ -139,7 +119,6 @@ void Database_set(struct Connection *conn, int id, const char *name, const char 
 // Function to fetch database details
 void Database_get(struct Connection *conn, int id) {
 	struct Address *addr = &conn->db->rows[id];
-
 	if (addr->set) {
 		Address_print(addr);
 	} else {
@@ -157,10 +136,8 @@ void Database_delete(struct Connection *conn, int id) {
 void Database_list(struct Connection *conn) {
 	int i = 0;
 	struct Database *db = conn->db;
-
 	for (i = 0; i < MAX_ROWS; i++) {
 		struct Address *cur = &db->rows[i];
-
 		if (cur->set) {
 			Address_print(cur);
 		}
@@ -171,15 +148,12 @@ void Database_list(struct Connection *conn) {
 int main(int argc, char *argv[]) {
 	if (argc < 3)
 		die("USAGE: a.out <dbfile> <action> [action params]"); // Display with error formatting using die which has errno
-
 	char *filename = argv[1]; // Consider the first argument as filename
 	char action = argv[2][0]; // Consider the first letter of the second argument as the mode
 	struct Connection *conn = Database_open(filename, action); // Open database with arguments from argv as mentioned before
 	int id = 0; // Initialise ID
-
 	if (argc > 3) id = atoi(argv[3]); // Convert and assign argv third argument to id in integer form
 	if (id >= MAX_ROWS) die("There's not that many records."); // If the id is more than the number of maximum rows, end the program with die error formatting
-
 	switch (action) {
 		case 'c':
 			Database_create(conn);
@@ -208,8 +182,6 @@ int main(int argc, char *argv[]) {
 		default:
 				die("Invalid action: c=create, g=get, s=set, d=del, l=list");
 	}
-
 	Database_close(conn);
-
 	return 0;
 }
