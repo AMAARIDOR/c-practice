@@ -1,8 +1,8 @@
 #include <stdio.h> // Standard Library for C
 #include <assert.h> // Add assert macro for checking if memory exists
-#include <stdlib.h>
-#include <errno.h>
-#include <string.h>
+#include <stdlib.h> // Provides variable types, macros and functions
+#include <errno.h> // Error formatting and error macros
+#include <string.h> // Provides functions and macro for manipulating arrays of characters.
 
 // Define some values from future reference 
 #define MAX_DATA 512
