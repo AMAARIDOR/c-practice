@@ -43,6 +43,7 @@ void Address_print(struct Address *addr) {
     printf("%d %s %s\n", addr->id, addr->name, addr->email);
 }
 
+// Function to load Data from already existing database
 void Database_load(struct Connection *conn) {
     int rc = fread(conn->db, sizeof(struct Database), 1, conn->file);
 
@@ -50,6 +51,7 @@ void Database_load(struct Connection *conn) {
         die("Failed to load database.");
 }
 
+// Struct to open database when needed with the filename and mode as arguments
 struct Connection *Database_open(const char *filename, char mode) {
     struct Connection *conn = malloc(sizeof(struct Connection));
 
@@ -77,6 +79,7 @@ struct Connection *Database_open(const char *filename, char mode) {
     return conn;
 }
 
+// Function to close database
 void Database_close(struct Connection *conn) {
     if (conn) {
         if (conn->file)
@@ -87,6 +90,7 @@ void Database_close(struct Connection *conn) {
     }
 }
 
+// Function to write to database
 void Database_write(struct Connection *conn) {
     rewind(conn->file);
 
@@ -101,6 +105,7 @@ void Database_write(struct Connection *conn) {
 
 }
 
+// Function to create a database if doesn't exist already
 void Database_create(struct Connection *conn) {
 	int i = 0;
 
@@ -112,6 +117,7 @@ void Database_create(struct Connection *conn) {
 	}
 }
 
+// Function to set a database with name, email
 void Database_set(struct Connection *conn, int id, const char *name, const char *email) {
 	struct Address *addr = &conn->db->rows[id];
 
@@ -130,6 +136,7 @@ void Database_set(struct Connection *conn, int id, const char *name, const char 
 		die("Email copy failed");
 }
 
+// Function to fetch database details
 void Database_get(struct Connection *conn, int id) {
 	struct Address *addr = &conn->db->rows[id];
 
@@ -140,11 +147,13 @@ void Database_get(struct Connection *conn, int id) {
 	}
 }
 
+// Function to delete database 
 void Database_delete(struct Connection *conn, int id) {
 	struct Address addr = { .id = id, .set = 0 };
 	conn->db->rows[id] = addr;
 }
 
+// Function to list database items and details
 void Database_list(struct Connection *conn) {
 	int i = 0;
 	struct Database *db = conn->db;
@@ -158,6 +167,7 @@ void Database_list(struct Connection *conn) {
 	}
 } 
 
+// Main function
 int main(int argc, char *argv[]) {
 	if (argc < 3)
 		die("USAGE: a.out <dbfile> <action> [action params]");
