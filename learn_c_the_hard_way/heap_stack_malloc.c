@@ -8,7 +8,7 @@
 #define MAX_DATA 512
 #define MAX_ROWS 100
 
-// Create Address struct 
+// Create Address struct
 struct Address {
     int id;
     int set;
@@ -16,12 +16,12 @@ struct Address {
     char email[MAX_DATA];
 };
 
-// Create Database struct 
+// Create Database struct with Address and rows array with MAX_ROWS defined value
 struct Database {
     struct Address rows[MAX_ROWS];
 };
 
-// Create Connection struct
+// Create Connection struct with FILE pointer and *db pointer for Database struct
 struct Connection {
     FILE *file;
     struct Database *db;
@@ -38,12 +38,11 @@ void die(const char *message) {
     exit(1);
 };
 
-// Function to print address of database item
+// Function to print items of the address of each database item
 void Address_print(struct Address *addr) {
     printf("%d %s %s\n", addr->id, addr->name, addr->email);
 }
 
-// Function for loading database items
 void Database_load(struct Connection *conn) {
     int rc = fread(conn->db, sizeof(struct Database), 1, conn->file);
 
