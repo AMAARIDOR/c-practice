@@ -170,10 +170,10 @@ void Database_list(struct Connection *conn) {
 // Main function
 int main(int argc, char *argv[]) {
 	if (argc < 3)
-		die("USAGE: a.out <dbfile> <action> [action params]");
+		die("USAGE: a.out <dbfile> <action> [action params]"); // Display with error formatting using die which has errno
 
-	char *filename = argv[1];
-	char action = argv[2][0];
+	char *filename = argv[1]; // Consider the first argument as filename
+	char action = argv[2][0]; // Consider the first letter of the second argument as the mode
 	struct Connection *conn = Database_open(filename, action);
 	int id = 0;
 
