@@ -174,8 +174,8 @@ int main(int argc, char *argv[]) {
 
 	char *filename = argv[1]; // Consider the first argument as filename
 	char action = argv[2][0]; // Consider the first letter of the second argument as the mode
-	struct Connection *conn = Database_open(filename, action);
-	int id = 0;
+	struct Connection *conn = Database_open(filename, action); // Open database with arguments from argv as mentioned before
+	int id = 0; // Initialise ID
 
 	if (argc > 3) id = atoi(argv[3]);
 	if (id >= MAX_ROWS) die("There's not that many records.");
