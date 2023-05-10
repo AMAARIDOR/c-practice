@@ -1,14 +1,12 @@
-#include <stdio.h> // Standard Library for C
-#include <assert.h> // Add assert macro for checking if memory exists
-#include <stdlib.h> // Provides variable types, macros and functions
-#include <errno.h> // Error formatting and error macros
-#include <string.h> // Provides functions and macro for manipulating arrays of characters.
+#include <stdio.h> 
+#include <assert.h> 
+#include <stdlib.h> 
+#include <errno.h> 
+#include <string.h> 
 
-// Define some values from future reference 
 #define MAX_DATA 512
 #define MAX_ROWS 100
 
-// Create Address struct
 struct Address {
     int id;
     int set;
@@ -16,18 +14,15 @@ struct Address {
     char email[MAX_DATA];
 };
 
-// Create Database struct with Address and rows array with MAX_ROWS defined value
 struct Database {
     struct Address rows[MAX_ROWS];
 };
 
-// Create Connection struct with FILE pointer and *db pointer for Database struct
 struct Connection {
     FILE *file;
     struct Database *db;
 };
-	
-// Function to format error
+
 void die(const char *message) {
     if (errno) {
         perror(message);
@@ -37,19 +32,16 @@ void die(const char *message) {
     exit(1);
 };
 
-// Function to print items of the address of each database item
 void Address_print(struct Address *addr) {
     printf("%d %s %s\n", addr->id, addr->name, addr->email);
 }
 
-// Function to load Data from already existing database
 void Database_load(struct Connection *conn) {
     int rc = fread(conn->db, sizeof(struct Database), 1, conn->file);
     if (rc != 1)
         die("Failed to load database.");
 }
 
-// Struct to open database when needed with the filename and action as arguments
 struct Connection *Database_open(const char *filename, char mode) {
     struct Connection *conn = malloc(sizeof(struct Connection));
     if (!conn)
@@ -70,7 +62,6 @@ struct Connection *Database_open(const char *filename, char mode) {
     return conn;
 }
 
-// Function to close database
 void Database_close(struct Connection *conn) {
     if (conn) {
         if (conn->file)
@@ -81,7 +72,6 @@ void Database_close(struct Connection *conn) {
     }
 }
 
-// Function to write to database
 void Database_write(struct Connection *conn) {
     rewind(conn->file);
 	int rc = fwrite(conn->db, sizeof(struct Database), 1, conn->file);
@@ -92,7 +82,6 @@ void Database_write(struct Connection *conn) {
 		die("Cannot flush database.");
 }
 
-// Function to create a database if doesn't exist already
 void Database_create(struct Connection *conn) {
 	int i = 0;
 	for (i = 0; i < MAX_ROWS; i++) {
@@ -101,7 +90,6 @@ void Database_create(struct Connection *conn) {
 	}
 }
 
-// Function to set a database with name, email
 void Database_set(struct Connection *conn, int id, const char *name, const char *email) {
 	struct Address *addr = &conn->db->rows[id];
 	if (addr->set)
@@ -115,7 +103,6 @@ void Database_set(struct Connection *conn, int id, const char *name, const char 
 		die("Email copy failed");
 }
 
-// Function to fetch database details
 void Database_get(struct Connection *conn, int id) {
 	struct Address *addr = &conn->db->rows[id];
 	if (addr->set) {
@@ -125,13 +112,11 @@ void Database_get(struct Connection *conn, int id) {
 	}
 }
 
-// Function to delete database 
 void Database_delete(struct Connection *conn, int id) {
 	struct Address addr = { .id = id, .set = 0 };
 	conn->db->rows[id] = addr;
 }
 
-// Function to list database items and details
 void Database_list(struct Connection *conn) {
 	int i = 0;
 	struct Database *db = conn->db;
@@ -143,16 +128,15 @@ void Database_list(struct Connection *conn) {
 	}
 } 
 
-// Main function
 int main(int argc, char *argv[]) {
 	if (argc < 3)
-		die("USAGE: a.out <dbfile> <action> [action params]"); // Display with error formatting using die which has errno
-	char *filename = argv[1]; // Consider the first argument as filename
-	char action = argv[2][0]; // Consider the first letter of the second argument as the mode
-	struct Connection *conn = Database_open(filename, action); // Open database with arguments from argv as mentioned before
-	int id = 0; // Initialise ID
-	if (argc > 3) id = atoi(argv[3]); // Convert and assign argv third argument to id in integer form
-	if (id >= MAX_ROWS) die("There's not that many records."); // If the id is more than the number of maximum rows, end the program with die error formatting
+		die("USAGE: a.out <dbfile> <action> [action params]"); 
+	char *filename = argv[1]; 
+	char action = argv[2][0]; 
+	struct Connection *conn = Database_open(filename, action); 
+	int id = 0; 
+	if (argc > 3) id = atoi(argv[3]); 
+	if (id >= MAX_ROWS) die("There's not that many records."); 
 	switch (action) {
 		case 'c':
 			Database_create(conn);
