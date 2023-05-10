@@ -49,7 +49,7 @@ void Database_load(struct Connection *conn) {
         die("Failed to load database.");
 }
 
-// Struct to open database when needed with the filename and mode as arguments
+// Struct to open database when needed with the filename and action as arguments
 struct Connection *Database_open(const char *filename, char mode) {
     struct Connection *conn = malloc(sizeof(struct Connection));
     if (!conn)
